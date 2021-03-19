@@ -10,7 +10,8 @@ Another project for The Odin Project FullStack JavaScript course. I am choosing 
 **What I learned**
 
 
-**View Here**
+**View Here** 
+https://adcanis.github.io/Tic-Tac-Toe/
 
 
 **Thanks for looking**
