@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Tangerine">
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <script src="https://kit.fontawesome.com/ae22e6262a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Tic Tac Toe</title>
+</head>
+
+
+<header>
+    <h1 class="title">Tic-Tac-Toe</h1>
+    <p class="subtitle">A project created for The Odin Projects FullStack JavaScript Course</p>
+</header>
+
+<body>
+    <section class="section">
+    <div class="container" id="gameCard">
+        <div class="columns">
+            <div class="column is-half is-offset-one-quarter">
+            <div class="card has-text-centered">
+            <div class="container" id="game">
+                <div class="columns" id="gameColLeft">
+                <div class="column" id="playSquare">
+                        
+                </div>
+                <div class="column" id="playSquare">
+                        
+                </div>
+                <div class="column" id="playSquare">
+                        
+                </div>
+                </div>
+                <div class="columns" id="gameColMiddle">
+                <div class="column" id="playSquare">
+                        
+                </div>
+                <div class="column" id="playSquare">
+                        
+                </div>
+                <div class="column" id="playSquare">
+                                    
+                </div>
+                </div>
+                <div class="columns" id="gameColRight">
+                <div class="column" id="playSquare">
+                                    
+                </div>
+                <div class="column" id="playSquare">
+                                    
+                </div>
+                <div class="column" id="playSquare">
+                        
+                </div>
+                </div>
+                </div>        
+            <div class="card-content">
+                <div class="content">
+                <h1 class="title is-1"><span id="p1Display"> 0 </span> to <span id="p2Display"> 0 </span></h1>
+                    <p class="subtitle"></p>
+                <label for="" class="label is-large is-inline">How Many Rounds</label>
+                <div class="select is-rounded">
+                    <select id="round">
+                        <option value="3">3</option>
+                        <option value="5">5</option>option>
+                        <option value="7">7</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+                </div>
+                </div>
+            <footer class="card-footer">
+                <button id="reset" class="is-link button card-footer-item is-large">New Game</button>
+            </footer>
+        </div>
+        </div>
+        </div>
+    </div>
+    </section>  
+</body>
+
+<footer class="copyright">
+    <p>Project by  <a id='copyrightLink' href='https://github.com/adcanis'><span class='fab fa-github'></span> adcanis </a></p>
+</footer>
+<script src="app.js"></script>
+</html>
