@@ -1,6 +1,6 @@
 # Tic-Tac-Toe
 
-**NON FUNCTIONAL AT THE MOMENT TO BE FINISHED BY MONDAY MARCH 22 2021**
+
 
 
 ![alt text](https://github.com/adcanis/Tic-Tac-Toe/blob/main/images/tictactoeReadme.jpg)
