@@ -39,17 +39,6 @@ html {
     background-color: rgba(32,156,238, .2);
     cursor: pointer;
 }
-@media (max-width: 400px) {
-    #game {
-        margin: 0px;
-    }
-    #playSquare {
-        width: 20px;
-        height: 20px;
-        font-size: 15px;
-        padding: 2px;
-    }
-}
 
 /* Score Settings */
 #p1Display {

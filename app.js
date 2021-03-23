@@ -1,34 +1,17 @@
-//Global Settings
-let p1Display = document.querySelector('#p1Display');
-let p2Display = document.querySelector('#p2Display');
+//<----------Global Settings-------->
 const roundSelect = document.querySelector('#round');
 const newGameBtn = document.querySelector('#reset');
 const square = Array.from(document.querySelectorAll('#playSquare'));
-const winningCombos = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-]
-
+let p1Display = document.querySelector('#p1Display');
+let p2Display = document.querySelector('#p2Display');
 let turn = 'X';
 let gameBoard;
-let win;
 let p1Score = 0;
 let p2Score = 0;
 let winningScore = 3;
 let gameOver = false;
 
-roundSelect.addEventListener('change', function() {
-    winningScore = parseInt(this.value);
-    newGame();
-})
-
-//Game Settings
+//<----------New Game Button-------->
 function newGame() {
     gameOver = false;
     p1Score = 0;
@@ -44,9 +27,16 @@ function newGame() {
     p2Display.classList.remove('has-text-success', 'has-text-danger');
     game();
 }
-document.getElementById('game').addEventListener('click', playGame);
 
+//<----------Round Selector-------->
+roundSelect.addEventListener('change', function() {
+    winningScore = parseInt(this.value);
+    newGame();
+})
+
+//<----------Game Settings-------->
 function playGame() {
+    document.getElementById('game').addEventListener('click', function() {
     let play = square.findIndex(function(play) {
         return play === event.target;
     });
@@ -221,6 +211,9 @@ function playGame() {
             '', '', ''
             ];
     } 
+ //<---------Tie Game Settings-------->
+    
+//<----------Winning Score Settings-------->
     if (p1Score === winningScore) {
         alert('congrats Player 1, You Win');
         p1Display.classList.add('has-text-success')
@@ -232,17 +225,18 @@ function playGame() {
         p1Display.classList.add('has-text-danger')
         location.reload();
     } 
-    game();
-}
+   
 
+    game();
+})
+}
 function game() {
     gameBoard.forEach(function(mark, index) {
     square[index].textContent = mark;
     });
-
 } 
+playGame();
 newGame();
 newGameBtn.addEventListener('click', newGame);
 
-
-
+    
