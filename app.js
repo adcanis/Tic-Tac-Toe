@@ -14,6 +14,8 @@ let win;
 let winningScore = 3;
 let gameOver = false;
 
+messages.style.color = '#3273dc';
+
 //<----------Game Board Buttons and Selector-------->
 
 //Round Select//
@@ -71,25 +73,42 @@ function game() {
     gameBoard.forEach(function(mark, index) {
     squares[index].textContent = mark;
     })
-    messages.textContent = `It's ${turn}'s turn`;
+    messages.textContent = `It's your turn "${turn}"`;
 
-    if (win === 'X') {
+    if 
+    
+    (win === 'X') {
         p1Score += 1;
         p1Display.textContent = p1Score;
         p1Display.style.color = "#00d1b2";
         p2Display.style.color = "#ff3860";
-        alert('X wins this Round! Click the board to continue.'); 
+        messages.textContent = 'X wins this Round! Click the board to continue.'; 
         gameBoard = [
             '', '', '',
             '', '', '',
             '', '', ''
             ];  
-    } if (win === 'O') {
+
+    } 
+    
+    if (win === 'O') {
         p2Score += 1;
         p2Display.textContent = p1Score;
         p2Display.style.color = "#00d1b2";
         p1Display.style.color = "#ff3860";
-        alert('O wins this Round! Click the board to continue.');
+        messages.textContent = 'O wins this Round! Click the board to continue.';
+        gameBoard = [
+            '', '', '',
+            '', '', '',
+            '', '', ''
+            ];
+
+    } 
+    
+    if (win === 'T') {
+        p1Display.style.color = '#ffdd57';
+        p2Display.style.color = '#ffdd57';
+        messages.textContent = "it's a draw...Click the board to continue";
         gameBoard = [
             '', '', '',
             '', '', '',
@@ -110,5 +129,5 @@ newGame();
 
 newGameBtn.addEventListener('click', function () {
     location.reload();
-    
+
 })
