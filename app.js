@@ -5,6 +5,7 @@ const p1Display = document.querySelector('#p1Display');
 const p2Display = document.querySelector('#p2Display');
 const squares = Array.from(document.querySelectorAll('#playSquare'));
 const messages = document.querySelector('#message');
+
 let p1Score = 0;
 let p2Score = 0;
 let gameBoard;
@@ -14,11 +15,13 @@ let winningScore = 3;
 let gameOver = false;
 
 //<----------Game Board Buttons and Selector-------->
+
 //Round Select//
 roundSelect.addEventListener('change', function() {
     winningScore = parseInt(this.value);
     newGame();
 })
+
 //New Game Button//
 function newGame() {
     gameOver = false;
@@ -37,13 +40,15 @@ function newGame() {
 }
 
 //<----------Game Play Settings-------->
+
+document.getElementById('game').addEventListener('click', playTurn);
 const winningCombos = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], 
     [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]
 ];
-document.getElementById('game').addEventListener('click', playTurn);
 
 //<----------Game Play-------->
+
 function getWinner() {
     let winner = null;
     winningCombos.forEach(function(combo, index) {
@@ -66,7 +71,8 @@ function game() {
     gameBoard.forEach(function(mark, index) {
     squares[index].textContent = mark;
     })
-    messages.textContent = `It's ${turn}'s turn`
+    messages.textContent = `It's ${turn}'s turn`;
+
     if (win === 'X') {
         p1Score += 1;
         p1Display.textContent = p1Score;
@@ -90,6 +96,7 @@ function game() {
             '', '', ''
             ];
     }
+
     if (p1Score === winningScore) {
         alert('Congrats to X, you won the game!');
         location.reload();
@@ -98,7 +105,10 @@ function game() {
         location.reload();
     }
 }
+
 newGame();
+
 newGameBtn.addEventListener('click', function () {
     location.reload();
+    
 })
