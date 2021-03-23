@@ -1,17 +1,25 @@
 //<----------Global Settings-------->
 const roundSelect = document.querySelector('#round');
 const newGameBtn = document.querySelector('#reset');
-const square = Array.from(document.querySelectorAll('#playSquare'));
-let p1Display = document.querySelector('#p1Display');
-let p2Display = document.querySelector('#p2Display');
-let turn = 'X';
-let gameBoard;
+const p1Display = document.querySelector('#p1Display');
+const p2Display = document.querySelector('#p2Display');
+const squares = Array.from(document.querySelectorAll('#playSquare'));
+const messages = document.querySelector('#message');
 let p1Score = 0;
 let p2Score = 0;
+let gameBoard;
+let turn = 'X';
+let win;
 let winningScore = 3;
 let gameOver = false;
 
-//<----------New Game Button-------->
+//<----------Game Board Buttons and Selector-------->
+//Round Select//
+roundSelect.addEventListener('change', function() {
+    winningScore = parseInt(this.value);
+    newGame();
+})
+//New Game Button//
 function newGame() {
     gameOver = false;
     p1Score = 0;
@@ -28,215 +36,69 @@ function newGame() {
     game();
 }
 
-//<----------Round Selector-------->
-roundSelect.addEventListener('change', function() {
-    winningScore = parseInt(this.value);
-    newGame();
-})
+//<----------Game Play Settings-------->
+const winningCombos = [
+    [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], 
+    [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]
+];
+document.getElementById('game').addEventListener('click', playTurn);
 
-//<----------Game Settings-------->
-function playGame() {
-    document.getElementById('game').addEventListener('click', function() {
-    let play = square.findIndex(function(play) {
-        return play === event.target;
+//<----------Game Play-------->
+function getWinner() {
+    let winner = null;
+    winningCombos.forEach(function(combo, index) {
+        if (gameBoard[combo[0]] && gameBoard[combo[0]] === gameBoard[combo[1]] && gameBoard[combo[0]] === gameBoard[combo[2]]) winner = gameBoard[combo[0]];
+        });
+        return winner ? winner : gameBoard.includes('') ? null : 'T';
+};
+
+function playTurn() {
+    let playTurn = squares.findIndex(function(square) {
+        return square === event.target;
     });
-    gameBoard[play] = turn;
+    gameBoard[playTurn] = turn;
     turn = turn === 'X' ? 'O' : 'X';
-    if (square[0].textContent === 'X' && square[1].textContent === 'X' && square[2].textContent === 'X') {
-        p1Score += 1;
-        p1Display.classList.add('has-text-success');
-        p1Display.innerHTML 
-        p1Display.textContent = p1Score;
-        alert('Player 1 wins this round!');
-        gameBoard = [
-            '', '', '',
-            '', '', '',
-            '', '', ''
-            ];      
-    } if (square[0].textContent === 'O' && square[1].textContent === 'O' && square[2].textContent === 'O') {
-        p2Score += 1;
-        p2Display.classList.add('has-text-success');
-        p2Display.innerHTML = p2Score;
-        alert('Player 2 wins this round!');
-        gameBoard = [
-            '', '', '',
-            '', '', '',
-            '', '', ''
-            ];
-    }  if (square[3].textContent === 'X' && square[4].textContent === 'X' && square[5].textContent === 'X') {
-        p1Score += 1;
-        p1Display.classList.add('has-text-success');
-        p1Display.innerHTML 
-        p1Display.textContent = p1Score;
-        alert('Player 1 wins this round!');
-        gameBoard = [
-            '', '', '',
-            '', '', '',
-            '', '', ''
-            ];          
-    } if (square[3].textContent === 'O' && square[4].textContent === 'O' && square[5].textContent === 'O') {
-        p2Score += 1;
-        p2Display.classList.add('has-text-success');
-        p2Display.innerHTML = p2Score;
-        alert('Player 2 wins this round!');
-        gameBoard = [
-            '', '', '',
-            '', '', '',
-            '', '', ''
-            ];
-    }  if (square[6].textContent === 'X' && square[7].textContent === 'X' &&square[8].textContent === 'X') {
-        p1Score += 1;
-        p1Display.classList.add('has-text-success');
-        p1Display.innerHTML 
-        p1Display.textContent = p1Score;
-        alert('Player 1 wins this round!');
-        gameBoard = [
-            '', '', '',
-            '', '', '',
-            '', '', ''
-            ];          
-    } if (square[6].textContent === 'O' && square[7].textContent === 'O' && square[8].textContent === 'O') {
-        p2Score += 1;
-        p2Display.classList.add('has-text-success');
-        p2Display.innerHTML = p2Score;
-        alert('Player 2 wins this round!');
-        gameBoard = [
-            '', '', '',
-            '', '', '',
-            '', '', ''
-            ];
-    }  if (square[0].textContent === 'X' && square[3].textContent === 'X' && square[6].textContent === 'X') {
-        p1Score += 1;
-        p1Display.classList.add('has-text-success');
-        p1Display.innerHTML 
-        p1Display.textContent = p1Score;
-        alert('Player 1 wins this round!');
-        gameBoard = [
-            '', '', '',
-            '', '', '',
-            '', '', ''
-            ];          
-    } if (square[0].textContent === 'O' && square[3].textContent === 'O' &&square[6].textContent === 'O') {
-        p2Score += 1;
-        p2Display.classList.add('has-text-success');
-        p2Display.innerHTML = p2Score;
-        alert('Player 2 wins this round!');
-        gameBoard = [
-            '', '', '',
-            '', '', '',
-            '', '', ''
-            ];
-    }  if (square[1].textContent === 'X' && square[4].textContent === 'X' && square[7].textContent === 'X') {
-        p1Score += 1;
-        p1Display.classList.add('has-text-success');
-        p1Display.innerHTML 
-        p1Display.textContent = p1Score;
-        alert('Player 1 wins this round!');
-        gameBoard = [
-            '', '', '',
-            '', '', '',
-            '', '', ''
-            ];          
-    } if (square[1].textContent === 'O' && square[4].textContent === 'O' &&square[7].textContent === 'O') {
-        p2Score += 1;
-        p2Display.classList.add('has-text-success');
-        p2Display.innerHTML = p2Score;
-        alert('Player 2 wins this round!');
-        gameBoard = [
-            '', '', '',
-            '', '', '',
-            '', '', ''
-            ];
-    }  if (square[2].textContent === 'X' & square[5].textContent === 'X' & square[8].textContent === 'X') {
-        p1Score += 1;
-        p1Display.classList.add('has-text-success');
-        p1Display.innerHTML 
-        p1Display.textContent = p1Score;
-        alert('Player 1 wins this round!');
-        gameBoard = [
-            '', '', '',
-            '', '', '',
-            '', '', ''
-            ];          
-    } if (square[2].textContent === 'O' && square[5].textContent === 'O' && square[8].textContent === 'O') {
-        p2Score += 1;
-        p2Display.classList.add('has-text-success');
-        p2Display.innerHTML = p2Score;
-        alert('Player 2 wins this round!');
-        gameBoard = [
-            '', '', '',
-            '', '', '',
-            '', '', ''
-            ];
-    }  if (square[0].textContent === 'X' && square[4].textContent === 'X' && square[8].textContent === 'X') {
-        p1Score += 1;
-        p1Display.classList.add('has-text-success');
-        p1Display.innerHTML 
-        p1Display.textContent = p1Score;
-        alert('Player 1 wins this round!');
-        gameBoard = [
-            '', '', '',
-            '', '', '',
-            '', '', ''
-            ];          
-    } if (square[0].textContent === 'O' & square[4].textContent === 'O' & square[8].textContent === 'O') {
-        p2Score += 1;
-        p2Display.classList.add('has-text-success');
-        p2Display.innerHTML = p2Score;
-        alert('Player 2 wins this round!');
-        gameBoard = [
-            '', '', '',
-            '', '', '',
-            '', '', ''
-            ];
-    }  if (square[2].textContent === 'X' && square[4].textContent === 'X' && square[6].textContent === 'X') {
-        p1Score += 1;
-        p1Display.classList.add('has-text-success');
-        p1Display.innerHTML 
-        p1Display.textContent = p1Score;
-        alert('Player 1 wins this round!');
-        gameBoard = [
-            '', '', '',
-            '', '', '',
-            '', '', ''
-            ];          
-    } if (square[2].textContent === 'O' && square[4].textContent === 'O' &&square[6].textContent === 'O') {
-        p2Score += 1;
-        p2Display.classList.add('has-text-success');
-        p2Display.innerHTML = p2Score;
-        alert('Player 2 wins this round!');
-        gameBoard = [
-            '', '', '',
-            '', '', '',
-            '', '', ''
-            ];
-    } 
- //<---------Tie Game Settings-------->
-    
-//<----------Winning Score Settings-------->
-    if (p1Score === winningScore) {
-        alert('congrats Player 1, You Win');
-        p1Display.classList.add('has-text-success')
-        p2Display.classList.add('has-text-danger')
-        location.reload();
-    } if (p2Score === winningScore) {
-        alert('congrats Player 1, You Win');
-        p2Display.classList.add('has-text-success')
-        p1Display.classList.add('has-text-danger')
-        location.reload();
-    } 
-   
-
+    win = getWinner();
     game();
-})
-}
+};
+
 function game() {
     gameBoard.forEach(function(mark, index) {
-    square[index].textContent = mark;
-    });
-} 
-playGame();
+    squares[index].textContent = mark;
+    })
+    messages.textContent = `It's ${turn}'s turn`
+    if (win === 'X') {
+        p1Score += 1;
+        p1Display.textContent = p1Score;
+        p1Display.style.color = "#00d1b2";
+        p2Display.style.color = "#ff3860";
+        alert('X wins this Round! Click the board to continue.'); 
+        gameBoard = [
+            '', '', '',
+            '', '', '',
+            '', '', ''
+            ];  
+    } if (win === 'O') {
+        p2Score += 1;
+        p2Display.textContent = p1Score;
+        p2Display.style.color = "#00d1b2";
+        p1Display.style.color = "#ff3860";
+        alert('O wins this Round! Click the board to continue.');
+        gameBoard = [
+            '', '', '',
+            '', '', '',
+            '', '', ''
+            ];
+    }
+    if (p1Score === winningScore) {
+        alert('Congrats to X, you won the game!');
+        location.reload();
+    } if (p2Score === winningScore) {
+        alert('COngrats to O, you won the game!');
+        location.reload();
+    }
+}
 newGame();
-newGameBtn.addEventListener('click', newGame);
-
-    
+newGameBtn.addEventListener('click', function () {
+    location.reload();
+})
